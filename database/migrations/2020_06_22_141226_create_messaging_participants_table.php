@@ -12,10 +12,10 @@ class CreateSettingsTable extends Migration {
 	 */
 	public function up()
 	{
-        $tableName = config('messaging.db.participants_table');
+        $tableName = config('messenger.db.participants_table');
 
         if (empty($tableName)) {
-            throw new \Exception('Error: config/messaging.php not found and defaults could not be merged. Please publish the package configuration before proceeding.');
+            throw new \Exception('Error: config/messenger.php not found and defaults could not be merged. Please publish the package configuration before proceeding.');
         }
 
 		Schema::create($tableName, function(Blueprint $table)
@@ -26,7 +26,7 @@ class CreateSettingsTable extends Migration {
 
 			$table -> dateTime('first_read_at') -> nullable();
 			$table -> dateTime('last_read_at') -> nullable();
-			
+
             $table -> dateTime('created_at') -> nullable();
             $table -> dateTime('updated_at') -> nullable() -> useCurrent();
             $table -> dateTime('deleted_at') -> nullable();
@@ -41,10 +41,10 @@ class CreateSettingsTable extends Migration {
 	 */
 	public function down()
 	{
-		$tableName = config('messaging.db.participants_table');
+		$tableName = config('messenger.db.participants_table');
 
         if (empty($tableName)) {
-			throw new \Exception('Error: config/messaging.php not found and defaults could not be merged. Please publish the package configuration before proceeding, or drop the table manually.');
+			throw new \Exception('Error: config/messenger.php not found and defaults could not be merged. Please publish the package configuration before proceeding, or drop the table manually.');
         }
 
 		Schema::drop($tableName);

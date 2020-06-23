@@ -1,6 +1,6 @@
 <?php
 
-namespace Cmgmyr\Messenger\Models;
+namespace SylveK\LaravelMessenger\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model as Eloquent;

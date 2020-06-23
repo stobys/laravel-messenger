@@ -1,6 +1,6 @@
 <?php
 
-namespace Cmgmyr\Messenger\Models;
+namespace SylveK\LaravelMessenger\Helpers;
 
 class Models
 {

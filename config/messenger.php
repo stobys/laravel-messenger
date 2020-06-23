@@ -18,6 +18,4 @@ return [
 
     ],
 
-    // -- Fallback setting
-    'fallback'   => true
 ];
