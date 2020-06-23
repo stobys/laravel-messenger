@@ -4,5 +4,5 @@ Laravel Internal Messaging Package - basically copy of https://github.com/cmgmyr
 
 
 ### License
-The Laravel Settings is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+The Laravel Messenger is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
 
