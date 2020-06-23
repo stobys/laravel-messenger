@@ -4,10 +4,12 @@ namespace SylveK\LaravelMessenger;
 
 use Illuminate\Support\ServiceProvider;
 
-// use Cmgmyr\Messenger\Models\Message;
-// use Cmgmyr\Messenger\Models\Models;
-// use Cmgmyr\Messenger\Models\Participant;
-// use Cmgmyr\Messenger\Models\Thread;
+// use SylveK\LaravelMessenger\Models\Message;
+// use SylveK\LaravelMessenger\Models\Models;
+// use SylveK\LaravelMessenger\Models\Participant;
+// use SylveK\LaravelMessenger\Models\Thread;
+
+use SylveK\LaravelMessenger\Facades\Messenger;
 
 class LaravelMessengerServiceProvider extends ServiceProvider
 {
@@ -56,14 +58,14 @@ class LaravelMessengerServiceProvider extends ServiceProvider
     {
         $config = $this->app->make('config');
 
-        Models::setMessageModel($config->get('messenger.message_model', Message::class));
-        Models::setThreadModel($config->get('messenger.thread_model', Thread::class));
-        Models::setParticipantModel($config->get('messenger.participant_model', Participant::class));
+        Messenger::setMessageModel($config->get('messenger.message_model', Message::class));
+        Messenger::setThreadModel($config->get('messenger.thread_model', Thread::class));
+        Messenger::setParticipantModel($config->get('messenger.participant_model', Participant::class));
 
-        Models::setTables([
-            'messages' => $config->get('messenger.messages_table', Models::message()->getTable()),
-            'participants' => $config->get('messenger.participants_table', Models::participant()->getTable()),
-            'threads' => $config->get('messenger.threads_table', Models::thread()->getTable()),
+        Messenger::setTables([
+            'messages' => $config->get('messenger.messages_table', Messenger::message()->getTable()),
+            'participants' => $config->get('messenger.participants_table', Messenger::participant()->getTable()),
+            'threads' => $config->get('messenger.threads_table', Messenger::thread()->getTable()),
         ]);
     }
 
@@ -80,9 +82,9 @@ class LaravelMessengerServiceProvider extends ServiceProvider
             return $config->get('auth.providers.users.model', $config->get('auth.model'));
         });
 
-        Models::setUserModel($model);
+        Messenger::setUserModel($model);
 
-        Models::setTables([
+        Messenger::setTables([
             'users' => (new $model)->getTable(),
         ]);
     }
