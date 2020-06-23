@@ -4,10 +4,9 @@ namespace SylveK\LaravelMessenger;
 
 use Illuminate\Support\ServiceProvider;
 
-// use SylveK\LaravelMessenger\Models\Message;
-// use SylveK\LaravelMessenger\Models\Models;
-// use SylveK\LaravelMessenger\Models\Participant;
-// use SylveK\LaravelMessenger\Models\Thread;
+use SylveK\LaravelMessenger\Models\Message;
+use SylveK\LaravelMessenger\Models\Participant;
+use SylveK\LaravelMessenger\Models\Thread;
 
 use SylveK\LaravelMessenger\Facades\Messenger as Messaging;
 
