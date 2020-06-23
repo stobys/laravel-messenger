@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use SylveK\LaravelMessenger\Facades\Messenger;
+
 class Message extends Eloquent
 {
     use SoftDeletes;
@@ -43,7 +45,7 @@ class Message extends Eloquent
      */
     public function __construct(array $attributes = [])
     {
-        $this->table = Models::table('messages');
+        $this->table = Messenger::table('messages');
 
         parent::__construct($attributes);
     }
@@ -57,7 +59,7 @@ class Message extends Eloquent
      */
     public function thread()
     {
-        return $this->belongsTo(Models::classname(Thread::class), 'thread_id', 'id');
+        return $this->belongsTo(Messenger::classname(Thread::class), 'thread_id', 'id');
     }
 
     /**
@@ -69,7 +71,7 @@ class Message extends Eloquent
      */
     public function user()
     {
-        return $this->belongsTo(Models::user(), 'user_id');
+        return $this->belongsTo(Messenger::user(), 'user_id');
     }
 
     /**
@@ -81,7 +83,7 @@ class Message extends Eloquent
      */
     public function participants()
     {
-        return $this->hasMany(Models::classname(Participant::class), 'thread_id', 'thread_id');
+        return $this->hasMany(Messenger::classname(Participant::class), 'thread_id', 'thread_id');
     }
 
     /**

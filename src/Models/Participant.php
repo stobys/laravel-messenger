@@ -5,6 +5,8 @@ namespace SylveK\LaravelMessenger\Models;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use SylveK\LaravelMessenger\Facades\Messenger;
+
 class Participant extends Eloquent
 {
     use SoftDeletes;
@@ -35,7 +37,7 @@ class Participant extends Eloquent
      */
     public function __construct(array $attributes = [])
     {
-        $this->table = Models::table('participants');
+        $this->table = Messenger::table('participants');
 
         parent::__construct($attributes);
     }
@@ -49,7 +51,7 @@ class Participant extends Eloquent
      */
     public function thread()
     {
-        return $this->belongsTo(Models::classname(Thread::class), 'thread_id', 'id');
+        return $this->belongsTo(Messenger::classname(Thread::class), 'thread_id', 'id');
     }
 
     /**
@@ -61,6 +63,6 @@ class Participant extends Eloquent
      */
     public function user()
     {
-        return $this->belongsTo(Models::user(), 'user_id');
+        return $this->belongsTo(Messenger::user(), 'user_id');
     }
 }

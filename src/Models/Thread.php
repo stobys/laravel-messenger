@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
+use SylveK\LaravelMessenger\Models\Thread;
+use SylveK\LaravelMessenger\Models\Message;
+use SylveK\LaravelMessenger\Models\Participant;
+
+use SylveK\LaravelMessenger\Facades\Messenger;
+
 class Thread extends Eloquent
 {
     use SoftDeletes;
@@ -45,7 +51,7 @@ class Thread extends Eloquent
      */
     public function __construct(array $attributes = [])
     {
-        $this->table = Models::table('threads');
+        $this->table = Messenger::table('threads');
 
         parent::__construct($attributes);
     }
@@ -59,7 +65,7 @@ class Thread extends Eloquent
      */
     public function messages()
     {
-        return $this->hasMany(Models::classname(Message::class), 'thread_id', 'id');
+        return $this->hasMany(Messenger::classname(Message::class), 'thread_id', 'id');
     }
 
     /**
@@ -81,7 +87,7 @@ class Thread extends Eloquent
      */
     public function participants()
     {
-        return $this->hasMany(Models::classname(Participant::class), 'thread_id', 'id');
+        return $this->hasMany(Messenger::classname(Participant::class), 'thread_id', 'id');
     }
 
     /**
@@ -93,7 +99,7 @@ class Thread extends Eloquent
      */
     public function users()
     {
-        return $this->belongsToMany(Models::classname('User'), Models::table('participants'), 'thread_id', 'user_id');
+        return $this->belongsToMany(Messenger::classname('User'), Models::table('participants'), 'thread_id', 'user_id');
     }
 
     /**
@@ -163,8 +169,8 @@ class Thread extends Eloquent
      */
     public function scopeForUser(Builder $query, $userId)
     {
-        $participantsTable = Models::table('participants');
-        $threadsTable = Models::table('threads');
+        $participantsTable = Messenger::table('participants');
+        $threadsTable = Messenger::table('threads');
 
         return $query->join($participantsTable, $this->getQualifiedKeyName(), '=', $participantsTable . '.thread_id')
             ->where($participantsTable . '.user_id', $userId)
@@ -182,8 +188,8 @@ class Thread extends Eloquent
      */
     public function scopeForUserWithNewMessages(Builder $query, $userId)
     {
-        $participantTable = Models::table('participants');
-        $threadsTable = Models::table('threads');
+        $participantTable = Messenger::table('participants');
+        $threadsTable = Messenger::table('threads');
 
         return $query->join($participantTable, $this->getQualifiedKeyName(), '=', $participantTable . '.thread_id')
             ->where($participantTable . '.user_id', $userId)
@@ -225,7 +231,7 @@ class Thread extends Eloquent
         $userIds = is_array($userId) ? $userId : (array) func_get_args();
 
         collect($userIds)->each(function ($userId) {
-            Models::participant()->firstOrCreate([
+            Messenger::participant()->firstOrCreate([
                 'user_id' => $userId,
                 'thread_id' => $this->id,
             ]);
@@ -243,7 +249,7 @@ class Thread extends Eloquent
     {
         $userIds = is_array($userId) ? $userId : (array) func_get_args();
 
-        Models::participant()->where('thread_id', $this->id)->whereIn('user_id', $userIds)->delete();
+        Messenger::participant()->where('thread_id', $this->id)->whereIn('user_id', $userIds)->delete();
     }
 
     /**
@@ -323,9 +329,9 @@ class Thread extends Eloquent
      */
     public function participantsString($userId = null, $columns = ['name'])
     {
-        $participantsTable = Models::table('participants');
-        $usersTable = Models::table('users');
-        $userPrimaryKey = Models::user()->getKeyName();
+        $participantsTable = Messenger::table('participants');
+        $usersTable = Messenger::table('users');
+        $userPrimaryKey = Messenger::user()->getKeyName();
 
         $selectString = $this->createSelectString($columns);
 
@@ -366,7 +372,7 @@ class Thread extends Eloquent
     {
         $dbDriver = $this->getConnection()->getDriverName();
         $tablePrefix = $this->getConnection()->getTablePrefix();
-        $usersTable = Models::table('users');
+        $usersTable = Messenger::table('users');
 
         switch ($dbDriver) {
         case 'pgsql':
