@@ -3,6 +3,10 @@
 return [
     // -- Models informations
     'models'   => [
+        'user'  => [
+            'table' => 'users',
+            'model' => App\Models\User::class,
+        ],
     	'threads'	=> [
     		'table'	=> 'threads',
     		'model'	=> SylveK\LaravelMessenger\Models\Thread::class,

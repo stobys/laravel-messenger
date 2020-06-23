@@ -1,6 +1,6 @@
 <?php
 
-namespace Aheenam\Test\Controllers;
+namespace SylveK\LaravelMessenger\Controllers;
 
 use Illuminate\Routing\Controller;
 
