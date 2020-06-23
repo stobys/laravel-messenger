@@ -33,7 +33,7 @@ class LaravelMessengerServiceProvider extends ServiceProvider
 
         $this -> loadViewsFrom(__DIR__.'/../resources/views', 'messenger');
 
-        $this -> app -> bind('calculator', function($app) {
+        $this -> app -> bind('messenger', function($app) {
             return new Messenger();
         });
 
