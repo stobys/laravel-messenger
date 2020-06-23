@@ -13,8 +13,8 @@ class MessengerController extends Controller
      */
     public function index()
     {
-        return view('messenger::index', [
-            'name' => $name
+        return view('messenger::mailbox', [
+            'name' => 'SylveK'
         ]);
     }
 

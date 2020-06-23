@@ -15,7 +15,12 @@ class LaravelMessengerServiceProvider extends ServiceProvider
     // -- Bootstrap the application services.
     public function boot()
     {
+        // -- Methods to load package assets
         $this -> loadRoutesFrom(__DIR__ .'/../routes/web.php');
+
+        // $this->loadTranslationsFrom(__DIR__ .'/../resources/lang', 'messenger');
+        // $this->loadViewsFrom(__DIR__ .'/../resources/views', 'messenger');
+        // $this->loadMigrationsFrom(__DIR__ .'/../database/migrations');
 
         $this -> registerPublishables();
         $this -> setMessengerModels();
