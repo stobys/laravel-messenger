@@ -9,7 +9,7 @@ use Illuminate\Support\ServiceProvider;
 // use SylveK\LaravelMessenger\Models\Participant;
 // use SylveK\LaravelMessenger\Models\Thread;
 
-use SylveK\LaravelMessenger\Facades\Messenger;
+use SylveK\LaravelMessenger\Facades\Messenger as Messaging;
 
 class LaravelMessengerServiceProvider extends ServiceProvider
 {
@@ -58,14 +58,14 @@ class LaravelMessengerServiceProvider extends ServiceProvider
     {
         $config = $this->app->make('config');
 
-        Messenger::setMessageModel($config->get('messenger.message_model', Message::class));
-        Messenger::setThreadModel($config->get('messenger.thread_model', Thread::class));
-        Messenger::setParticipantModel($config->get('messenger.participant_model', Participant::class));
+        Messaging::setMessageModel($config->get('messenger.message_model', Message::class));
+        Messaging::setThreadModel($config->get('messenger.thread_model', Thread::class));
+        Messaging::setParticipantModel($config->get('messenger.participant_model', Participant::class));
 
-        Messenger::setTables([
-            'messages' => $config->get('messenger.messages_table', Messenger::message()->getTable()),
-            'participants' => $config->get('messenger.participants_table', Messenger::participant()->getTable()),
-            'threads' => $config->get('messenger.threads_table', Messenger::thread()->getTable()),
+        Messaging::setTables([
+            'messages' => $config->get('messenger.messages_table', Messaging::message()->getTable()),
+            'participants' => $config->get('messenger.participants_table', Messaging::participant()->getTable()),
+            'threads' => $config->get('messenger.threads_table', Messaging::thread()->getTable()),
         ]);
     }
 
@@ -82,9 +82,9 @@ class LaravelMessengerServiceProvider extends ServiceProvider
             return $config->get('auth.providers.users.model', $config->get('auth.model'));
         });
 
-        Messenger::setUserModel($model);
+        Messaging::setUserModel($model);
 
-        Messenger::setTables([
+        Messaging::setTables([
             'users' => (new $model)->getTable(),
         ]);
     }
