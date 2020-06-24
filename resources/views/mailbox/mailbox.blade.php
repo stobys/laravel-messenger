@@ -9,7 +9,7 @@
                     <span class="btn-label">
                         <i class="fa fa-fw fa-envelope"></i>
                     </span>
-                    @lang($module .'.label.compose')
+                    @lang('messenger.label.compose')
                 </a>
             </div>
 
