@@ -14,7 +14,8 @@ class MessengerController extends Controller
     public function index()
     {
         return view('messenger::mailbox.mailbox', [
-            'name' => 'SylveK'
+            'module'    => 'messenger',
+            'name'      => 'SylveK'
         ]);
     }
 
