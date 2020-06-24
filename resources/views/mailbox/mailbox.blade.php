@@ -1,7 +1,40 @@
 @extends('skel.module-index')
 
 @section('content-header')
-    @include('skel.module-index-header', ['module' => 'messenger'])
+
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <a href="{{ route($module .'-compose') }}" class="btn btn-sm btn-labeled btn-info">
+                    <span class="btn-label">
+                        <i class="fa fa-fw fa-envelope"></i>
+                    </span>
+                    @lang($module .'.label.compose')
+                </a>
+            </div>
+
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb float-sm-right">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('home') }}">
+                                <i class="fa fa-fw fa-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{{ route($module .'-inbox') }}">
+                                @lang($module .'.label.'. $module)
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            @lang('messanger.label.breadcrumb-compose')
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+
 @endsection
 
 @section('content')
