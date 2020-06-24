@@ -16,6 +16,9 @@ Route::bind('message', function ($value) {
 // -- ROUTING GROUP
 Route::group(['prefix' => 'messages', 'middleware' => 'web'], function () {
 
-    Route::get('/', '\SylveK\LaravelMessenger\Controllers\MessengerController@index') -> name('messenger-index');
+    Route::get('/',			'\SylveK\LaravelMessenger\Controllers\MessengerController@index') -> name('messenger-index');
+    Route::get('/inbox',	'\SylveK\LaravelMessenger\Controllers\MessengerController@inbox') -> name('messenger-inbox');
+    Route::get('/compose',	'\SylveK\LaravelMessenger\Controllers\MessengerController@compose') -> name('messenger-compose');
+    Route::post('/send',	'\SylveK\LaravelMessenger\Controllers\MessengerController@send') -> name('messenger-send');
 
 });

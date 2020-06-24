@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <a href="{{ route($module .'-compose') }}" class="btn btn-sm btn-labeled btn-info">
+                <a href="{{ route('messenger-compose') }}" class="btn btn-sm btn-labeled btn-info">
                     <span class="btn-label">
                         <i class="fa fa-fw fa-envelope"></i>
                     </span>
@@ -22,8 +22,8 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route($module .'-inbox') }}">
-                                @lang($module .'.label.'. $module)
+                            <a href="{{ route('messenger-inbox') }}">
+                                @lang('messenger.label.messenger-inbox')
                             </a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">
