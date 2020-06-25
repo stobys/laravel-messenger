@@ -1,4 +1,4 @@
-@extends('skel.module-index')
+@extends('skel.master')
 
 @section('content-header')
 
@@ -41,8 +41,11 @@
 <!-- Main content -->
 <div class="row">
     <div class="col-md-3">
-        <a href="compose.html" class="btn btn-primary btn-block mb-3">
-            Compose
+        <a href="{{ route('messenger-compose') }}" class="btn btn-labeled btn-info mb-3">
+            <span class="btn-label">
+                <i class="fa fa-fw fa-envelope"></i>
+            </span>
+            @lang('messenger.label.compose')
         </a>
 
         <div class="card">
